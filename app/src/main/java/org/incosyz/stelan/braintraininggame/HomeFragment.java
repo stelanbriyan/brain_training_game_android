@@ -2,6 +2,7 @@ package org.incosyz.stelan.braintraininggame;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -59,6 +60,16 @@ public class HomeFragment extends Fragment {
                                     }
                                 })
                         .show();
+            }
+        });
+
+        View newButton = rootView.findViewById(R.id.new_game_button);
+        newButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),
+                        LevelActivity.class);
+                getActivity().startActivity(intent);
             }
         });
 
