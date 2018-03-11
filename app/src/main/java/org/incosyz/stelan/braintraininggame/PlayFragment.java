@@ -50,7 +50,11 @@ public class PlayFragment extends Fragment {
                 result += "-" + logic.get("logic");
                 answer -= Double.parseDouble(logic.get("answer").toString());
             } else {
-                result += logic.get("logic");
+                if (i == 0) {
+                    result += logic.get("logic");
+                } else {
+                    result += "+" + logic.get("logic");
+                }
                 answer += Double.parseDouble(logic.get("answer").toString());
             }
         }
