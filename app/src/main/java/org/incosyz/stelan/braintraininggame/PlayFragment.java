@@ -1,11 +1,14 @@
 package org.incosyz.stelan.braintraininggame;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.HashMap;
@@ -16,11 +19,16 @@ import java.util.Random;
  * @author Stelan Briyan
  */
 public class PlayFragment extends Fragment {
-    private TextView guessLabel;
     private double answer;
     private Random random = new Random();
 
     private String operations[] = {"+", "-", "/", "*"};
+
+    /**
+     * Components
+     */
+    private TextView guessLabel, answerLabel;
+    private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDel, btnHash, btnMinus;
 
     @Nullable
     @Override
@@ -29,8 +37,164 @@ public class PlayFragment extends Fragment {
                 container, false);
 
         this.guessLabel = rootView.findViewById(R.id.guess_label);
-        this.guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" ?"));
+        this.guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
+
+        this.answerLabel = rootView.findViewById(R.id.answerLabel);
+        this.btn0 = rootView.findViewById(R.id.btn0);
+        this.btn1 = rootView.findViewById(R.id.btn1);
+        this.btn2 = rootView.findViewById(R.id.btn2);
+        this.btn3 = rootView.findViewById(R.id.btn3);
+        this.btn4 = rootView.findViewById(R.id.btn4);
+        this.btn5 = rootView.findViewById(R.id.btn5);
+        this.btn6 = rootView.findViewById(R.id.btn6);
+        this.btn7 = rootView.findViewById(R.id.btn7);
+        this.btn8 = rootView.findViewById(R.id.btn8);
+        this.btn9 = rootView.findViewById(R.id.btn9);
+        this.btnDel = rootView.findViewById(R.id.btnDel);
+        this.btnHash = rootView.findViewById(R.id.btnHash);
+        this.btnMinus = rootView.findViewById(R.id.btnMinus);
+
+        this.btn0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btn9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setAnswerText(view);
+            }
+        });
+        this.btnHash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAnswer();
+            }
+        });
+        this.btnDel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteNumber();
+            }
+        });
+        this.btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text = answerLabel.getText().toString();
+                if (text.contains("-")) {
+                    answerLabel.setText(text.replace("-", ""));
+                } else {
+                    answerLabel.setText("-".concat(text));
+                }
+            }
+        });
         return rootView;
+    }
+
+    public void checkAnswer() {
+        int userAnswer = Integer.parseInt(this.answerLabel.getText().toString());
+        int correctAnswer = (int) answer;
+
+        System.out.println(userAnswer);
+        System.out.println(correctAnswer);
+        if (userAnswer == correctAnswer) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Your answer is correct!")
+                    .setPositiveButton(R.string.continue_label,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
+                                    answerLabel.setText("0");
+                                }
+                            })
+                    .show();
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Your answer is wrong!")
+                    .setNegativeButton(R.string.try_label,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            })
+                    .setPositiveButton(R.string.new_label,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
+                                    answerLabel.setText("0");
+                                }
+                            })
+                    .show();
+        }
+    }
+
+    public void deleteNumber() {
+        String text = this.answerLabel.getText().toString();
+        if (text.length() > 1) {
+            this.answerLabel.setText(text.substring(0, text.length() - 1));
+        } else {
+            this.answerLabel.setText("0");
+        }
+    }
+
+    public void setAnswerText(View view) {
+        Button button = (Button) view;
+        if ("0".equals(this.answerLabel.getText())) {
+            this.answerLabel.setText("");
+        }
+        this.answerLabel.setText(this.answerLabel.getText() + button.getText().toString());
     }
 
     /**
@@ -41,7 +205,7 @@ public class PlayFragment extends Fragment {
     private String generateGuessLabel() {
         String result = "";
 
-
+        answer = 0;
         for (int i = 0; i < PlayActivity.GAME_LEVEL; i++) {
             String op2 = operations[random.nextInt(2)];
 
@@ -59,8 +223,6 @@ public class PlayFragment extends Fragment {
             }
         }
 
-
-        System.out.println("ANSWER : " + answer);
         return result;
     }
 

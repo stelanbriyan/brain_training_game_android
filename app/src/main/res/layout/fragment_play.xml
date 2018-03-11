@@ -23,6 +23,7 @@
             android:textSize="@dimen/sub_menu_text_size" />
 
         <TextView
+            android:id="@+id/answerLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/menu_space"

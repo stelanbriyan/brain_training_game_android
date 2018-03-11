@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class PlayActivity extends AppCompatActivity {
-    public static int GAME_LEVEL = 2;
+    public static int GAME_LEVEL = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

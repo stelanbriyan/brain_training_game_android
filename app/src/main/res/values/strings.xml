@@ -18,6 +18,8 @@
     <string name="ok_label">OK</string>
     <string name="yes_label">YES</string>
     <string name="no_label">NO</string>
+    <string name="try_label">Try</string>
+    <string name="new_label">New</string>
 
     <string-array name="game_levels">
         <item>Novice</item>
