@@ -207,20 +207,13 @@ public class PlayFragment extends Fragment {
 
         answer = 0;
         for (int i = 0; i < PlayActivity.GAME_LEVEL; i++) {
-            String op2 = operations[random.nextInt(2)];
-
             Map<String, String> logic = getLogic();
-            if ("-".equals(op2)) {
-                result += "-" + logic.get("logic");
-                answer -= Double.parseDouble(logic.get("answer").toString());
+            if (i == 0) {
+                result += logic.get("logic");
             } else {
-                if (i == 0) {
-                    result += logic.get("logic");
-                } else {
-                    result += "+" + logic.get("logic");
-                }
-                answer += Double.parseDouble(logic.get("answer").toString());
+                result += "+" + logic.get("logic");
             }
+            answer += Double.parseDouble(logic.get("answer").toString());
         }
 
         return result;
