@@ -40,13 +40,13 @@ public class LevelFragment extends Fragment {
     public void startGame() {
         String difficulty = spinner.getSelectedItem().toString();
         if ("Novice".equals(difficulty)) {
-            PlayActivity.gameLevel = 2;
+            PlayActivity.GAME_LEVEL = 1;
         } else if ("Easy".equals(difficulty)) {
-            PlayActivity.gameLevel = 3;
+            PlayActivity.GAME_LEVEL = 2;
         } else if ("Medium".equals(difficulty)) {
-            PlayActivity.gameLevel = 4;
+            PlayActivity.GAME_LEVEL = 3;
         } else if ("Guru".equals(difficulty)) {
-            PlayActivity.gameLevel = 5;
+            PlayActivity.GAME_LEVEL = 4;
         }
 
         Intent intent = new Intent(getActivity(), PlayActivity.class);

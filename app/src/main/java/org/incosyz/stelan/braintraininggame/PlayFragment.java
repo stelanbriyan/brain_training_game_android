@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -18,7 +20,7 @@ public class PlayFragment extends Fragment {
     private double answer;
     private Random random = new Random();
 
-    String operations[] = {"/", "+", "-", "*"};
+    private String operations[] = {"+", "-", "/", "*"};
 
     @Nullable
     @Override
@@ -31,37 +33,71 @@ public class PlayFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Generate arithmetic expression randomly
+     *
+     * @return
+     */
     private String generateGuessLabel() {
-        int level = PlayActivity.gameLevel;
-
-        int[] numbers = getNumbers(level);
-
         String result = "";
 
-        for (int i = 0; i < numbers.length; i++) {
 
+        for (int i = 0; i < PlayActivity.GAME_LEVEL; i++) {
+            String op2 = operations[random.nextInt(2)];
 
-            result += numbers[i];
-            if (i != numbers.length - 1) {
-                result += getOperation();
+            Map<String, String> logic = getLogic();
+            if ("-".equals(op2)) {
+                result += "-" + logic.get("logic");
+                answer -= Double.parseDouble(logic.get("answer").toString());
+            } else {
+                result += logic.get("logic");
+                answer += Double.parseDouble(logic.get("answer").toString());
             }
-
         }
 
+
+        System.out.println("ANSWER : " + answer);
         return result;
     }
 
-    private String getOperation() {
-        int i = random.nextInt(4);
-        return operations[i];
+    private Map<String, String> getLogic() {
+        String logic = null;
+
+        int val1 = random.nextInt(100);
+        int val2 = random.nextInt(100);
+
+        String op = getOperation();
+
+        Double answer = 0D;
+        if ("+".equals(op)) {
+            answer = (double) val1 + val2;
+
+            logic = val1 + op + val2;
+        } else if ("-".equals(op)) {
+            answer = (double) val1 - val2;
+
+            logic = val1 + op + val2;
+        } else if ("/".equals(op)) {
+            answer = (double) val1 / val2;
+
+            logic = "(" + val1 + op + val2 + ")";
+        } else if ("*".equals(op)) {
+            answer = (double) val1 * val2;
+
+            logic = "(" + val1 + op + val2 + ")";
+        }
+
+        Map<String, String> map = new HashMap<>();
+        map.put("logic", logic);
+        map.put("answer", String.valueOf(answer));
+
+        return map;
     }
 
-    private int[] getNumbers(int size) {
-        int[] numbers = new int[size];
-
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = random.nextInt(100) + 1;
-        }
-        return numbers;
+    /**
+     * @return arithmetic operation symbols randomly.
+     */
+    private String getOperation() {
+        return operations[random.nextInt(4)];
     }
 }
