@@ -12,13 +12,15 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 public class LevelFragment extends Fragment {
+    private Spinner spinner;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_level,
                 container, false);
 
-        Spinner spinner = rootView.findViewById(R.id.game_level_spinner);
+        spinner = rootView.findViewById(R.id.game_level_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.game_levels, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -36,6 +38,17 @@ public class LevelFragment extends Fragment {
     }
 
     public void startGame() {
+        String difficulty = spinner.getSelectedItem().toString();
+        if ("Novice".equals(difficulty)) {
+            PlayActivity.gameLevel = 2;
+        } else if ("Easy".equals(difficulty)) {
+            PlayActivity.gameLevel = 3;
+        } else if ("Medium".equals(difficulty)) {
+            PlayActivity.gameLevel = 4;
+        } else if ("Guru".equals(difficulty)) {
+            PlayActivity.gameLevel = 5;
+        }
+
         Intent intent = new Intent(getActivity(), PlayActivity.class);
         getActivity().startActivity(intent);
     }

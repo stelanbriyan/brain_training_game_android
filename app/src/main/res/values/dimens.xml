@@ -10,4 +10,5 @@
     <dimen name="stroke_width">1dp</dimen>
     <dimen name="corner_radius">4dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="cal_btn_width">75dp</dimen>
 </resources>

@@ -4,10 +4,38 @@
     android:layout_height="match_parent"
     tools:context="org.incosyz.stelan.braintraininggame.PlayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/elevation_high"
+        android:orientation="vertical"
+        android:padding="@dimen/menu_padding"
+        tools:context=".PlayActivity">
+
+        <TextView
+            android:id="@+id/guess_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/menu_space"
+            android:text="Guess : 99 + 65 ?"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textSize="@dimen/sub_menu_text_size" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/menu_space"
+            android:text="0"
+            android:textAlignment="center"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textSize="@dimen/menu_text_size" />
+
+
+        <include
+            layout="@layout/key_board"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </FrameLayout>

@@ -20,7 +20,6 @@
     <string name="no_label">NO</string>
 
     <string-array name="game_levels">
-        <item>Difficulty</item>
         <item>Novice</item>
         <item>Easy</item>
         <item>Medium</item>
