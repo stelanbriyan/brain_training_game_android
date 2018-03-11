@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.incosyz.stelan.braintraininggame.LevelActivity">
+    tools:context="org.incosyz.stelan.braintraininggame.PlayActivity">
 
-    <!--android:background="@drawable/menu_background"-->
     <fragment
-        android:id="@+id/level_fragment"
-        class="org.incosyz.stelan.braintraininggame.LevelFragment"
+        android:id="@+id/play_fragment"
+        class="org.incosyz.stelan.braintraininggame.PlayFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_level" />
-
+        tools:layout="@layout/fragment_play" />
 
 </android.support.constraint.ConstraintLayout>
