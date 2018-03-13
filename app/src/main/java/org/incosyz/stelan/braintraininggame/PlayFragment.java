@@ -206,7 +206,7 @@ public class PlayFragment extends Fragment {
         String result = "";
 
         answer = 0;
-        for (int i = 0; i < PlayActivity.GAME_LEVEL; i++) {
+        for (int i = 0; i < (PlayActivity.GAME_LEVEL / 2); i++) {
             Map<String, String> logic = getLogic();
             if (i == 0) {
                 result += logic.get("logic");
@@ -214,6 +214,23 @@ public class PlayFragment extends Fragment {
                 result += "+" + logic.get("logic");
             }
             answer += Double.parseDouble(logic.get("answer").toString());
+        }
+
+        if (PlayActivity.GAME_LEVEL % 2 == 1) {
+            int val = random.nextInt(100);
+            String op = getOperation();
+
+            if ("+".equals(op)) {
+                answer += val;
+            } else if ("-".equals(op)) {
+                answer -= val;
+            } else if ("/".equals(op)) {
+                answer /= val;
+            } else if ("*".equals(op)) {
+                answer *= val;
+            }
+
+            result += op + val;
         }
 
         return result;
@@ -230,21 +247,15 @@ public class PlayFragment extends Fragment {
         Double answer = 0D;
         if ("+".equals(op)) {
             answer = (double) val1 + val2;
-
-            logic = val1 + op + val2;
         } else if ("-".equals(op)) {
             answer = (double) val1 - val2;
-
-            logic = val1 + op + val2;
         } else if ("/".equals(op)) {
             answer = (double) val1 / val2;
-
-            logic = "(" + val1 + op + val2 + ")";
         } else if ("*".equals(op)) {
             answer = (double) val1 * val2;
-
-            logic = "(" + val1 + op + val2 + ")";
         }
+
+        logic = "(" + val1 + op + val2 + ")";
 
         Map<String, String> map = new HashMap<>();
         map.put("logic", logic);
