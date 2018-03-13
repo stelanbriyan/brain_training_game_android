@@ -3,6 +3,7 @@ package org.incosyz.stelan.braintraininggame;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,12 +28,15 @@ public class PlayFragment extends Fragment {
     /**
      * Components
      */
-    private TextView guessLabel, answerLabel, hintsLabel;
+    private TextView guessLabel, answerLabel, hintsLabel, countdownLabel;
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDel, btnHash, btnMinus;
 
     public static boolean HINTS = false;
 
     private int wrongCount;
+    private int time = 0;
+
+    private CountDownTimer countDown;
 
     @Nullable
     @Override
@@ -42,6 +46,7 @@ public class PlayFragment extends Fragment {
 
         this.guessLabel = rootView.findViewById(R.id.guess_label);
         this.hintsLabel = rootView.findViewById(R.id.hints_label);
+        this.countdownLabel = rootView.findViewById(R.id.countdown_label);
         this.guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
 
         this.answerLabel = rootView.findViewById(R.id.answerLabel);
@@ -142,6 +147,8 @@ public class PlayFragment extends Fragment {
                 }
             }
         });
+
+        countDown();
         return rootView;
     }
 
@@ -149,12 +156,23 @@ public class PlayFragment extends Fragment {
         final int userAnswer = Integer.parseInt(this.answerLabel.getText().toString());
         int correctAnswer = (int) answer;
 
-        System.out.println(userAnswer);
-        System.out.println(correctAnswer);
+        this.countDown.cancel();
+
         if (userAnswer == correctAnswer) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("Your answer is correct!")
                     .setPositiveButton(R.string.continue_label,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    resetGame();
+                                }
+                            })
+                    .show();
+        } else if (wrongCount >= 4) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("4 Attempts over!")
+                    .setPositiveButton(R.string.new_label,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -170,21 +188,15 @@ public class PlayFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     wrongCount++;
+                                    countDown();
 
                                     if (HINTS) {
                                         if (answer > userAnswer) {
-                                            hintsLabel.setText("Greater");
+                                            hintsLabel.setText("Hint: Greater");
                                         } else {
-                                            hintsLabel.setText("Less");
+                                            hintsLabel.setText("Hint: Less");
                                         }
                                     }
-                                }
-                            })
-                    .setPositiveButton(R.string.new_label,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    resetGame();
                                 }
                             })
                     .show();
@@ -195,6 +207,31 @@ public class PlayFragment extends Fragment {
         wrongCount = 0;
         guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
         answerLabel.setText("0");
+        hintsLabel.setText("");
+        countDown();
+    }
+
+
+    public void countDown() {
+
+        time = 0;
+        countDown = new CountDownTimer(10000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                if (time < 10) {
+                    time++;
+                    countdownLabel.setText("Countdown: " + (10 - time));
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                countdownLabel.setText("Time Over!");
+                checkAnswer();
+            }
+
+        }.start();
+
     }
 
     public void deleteNumber() {

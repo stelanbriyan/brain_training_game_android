@@ -44,10 +44,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/menu_space"
-            android:textAlignment="center"
             android:textAppearance="?android:textAppearanceLarge"
             android:textSize="@dimen/menu_text_size" />
 
+        <TextView
+            android:id="@+id/countdown_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/menu_space"
+            android:text="Countdown: 10"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textSize="@dimen/menu_text_size" />
     </LinearLayout>
 
 </FrameLayout>
