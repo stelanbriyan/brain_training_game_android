@@ -220,7 +220,7 @@ public class PlayFragment extends Fragment {
             public void onTick(long millisUntilFinished) {
                 if (time < 10) {
                     time++;
-                    countdownLabel.setText("Countdown: " + (10 - time));
+                    countdownLabel.setText("Time Remaining " + (10 - time) + " secs");
                 }
             }
 
