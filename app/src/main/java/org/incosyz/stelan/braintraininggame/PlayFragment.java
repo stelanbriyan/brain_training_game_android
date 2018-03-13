@@ -27,8 +27,12 @@ public class PlayFragment extends Fragment {
     /**
      * Components
      */
-    private TextView guessLabel, answerLabel;
+    private TextView guessLabel, answerLabel, hintsLabel;
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDel, btnHash, btnMinus;
+
+    public static boolean HINTS = false;
+
+    private int wrongCount;
 
     @Nullable
     @Override
@@ -37,6 +41,7 @@ public class PlayFragment extends Fragment {
                 container, false);
 
         this.guessLabel = rootView.findViewById(R.id.guess_label);
+        this.hintsLabel = rootView.findViewById(R.id.hints_label);
         this.guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
 
         this.answerLabel = rootView.findViewById(R.id.answerLabel);
@@ -141,7 +146,7 @@ public class PlayFragment extends Fragment {
     }
 
     public void checkAnswer() {
-        int userAnswer = Integer.parseInt(this.answerLabel.getText().toString());
+        final int userAnswer = Integer.parseInt(this.answerLabel.getText().toString());
         int correctAnswer = (int) answer;
 
         System.out.println(userAnswer);
@@ -153,8 +158,7 @@ public class PlayFragment extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
-                                    answerLabel.setText("0");
+                                    resetGame();
                                 }
                             })
                     .show();
@@ -165,19 +169,32 @@ public class PlayFragment extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                    wrongCount++;
 
+                                    if (HINTS) {
+                                        if (answer > userAnswer) {
+                                            hintsLabel.setText("Greater");
+                                        } else {
+                                            hintsLabel.setText("Less");
+                                        }
+                                    }
                                 }
                             })
                     .setPositiveButton(R.string.new_label,
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
-                                    answerLabel.setText("0");
+                                    resetGame();
                                 }
                             })
                     .show();
         }
+    }
+
+    private void resetGame() {
+        wrongCount = 0;
+        guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
+        answerLabel.setText("0");
     }
 
     public void deleteNumber() {
@@ -250,7 +267,7 @@ public class PlayFragment extends Fragment {
         } else if ("-".equals(op)) {
             answer = (double) val1 - val2;
         } else if ("/".equals(op)) {
-            answer = (double) val1 / val2;
+            answer = (double) (val1 / val2);
         } else if ("*".equals(op)) {
             answer = (double) val1 * val2;
         }

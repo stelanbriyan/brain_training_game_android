@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.ToggleButton;
 
 public class LevelFragment extends Fragment {
     private Spinner spinner;
@@ -31,6 +32,19 @@ public class LevelFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startGame();
+            }
+        });
+
+        final ToggleButton toggleButton = rootView.findViewById(R.id.hint_toggle);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                if ("ON".equals(toggleButton.getText())) {
+                    PlayFragment.HINTS = true;
+                } else {
+                    PlayFragment.HINTS = false;
+                }
             }
         });
 

@@ -21,6 +21,9 @@
     <string name="try_label">Try</string>
     <string name="new_label">New</string>
 
+    <string name="on_label">ON</string>
+    <string name="off_label">OFF</string>
+
     <string-array name="game_levels">
         <item>Novice</item>
         <item>Easy</item>
