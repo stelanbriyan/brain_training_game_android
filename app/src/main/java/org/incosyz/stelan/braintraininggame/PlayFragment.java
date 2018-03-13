@@ -237,7 +237,7 @@ public class PlayFragment extends Fragment {
     }
 
     private Map<String, String> getLogic() {
-        String logic = null;
+        String logic;
 
         int val1 = random.nextInt(100);
         int val2 = random.nextInt(100);
