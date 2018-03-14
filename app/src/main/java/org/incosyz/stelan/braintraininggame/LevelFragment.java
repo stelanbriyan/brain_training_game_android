@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.ToggleButton;
 
+/**
+ * @author Stelan Briyan
+ */
 public class LevelFragment extends Fragment {
     private Spinner spinner;
 

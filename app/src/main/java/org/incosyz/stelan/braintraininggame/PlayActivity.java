@@ -3,6 +3,9 @@ package org.incosyz.stelan.braintraininggame;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * @author Stelan Briyan
+ */
 public class PlayActivity extends AppCompatActivity {
     public static int GAME_LEVEL = 2;
 
