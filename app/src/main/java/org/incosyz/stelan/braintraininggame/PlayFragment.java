@@ -2,6 +2,7 @@ package org.incosyz.stelan.braintraininggame;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
@@ -20,6 +21,10 @@ import java.util.Random;
  * @author Stelan Briyan
  */
 public class PlayFragment extends Fragment {
+
+    public static boolean HINTS = false;
+    public static double SCORE = 0;
+
     private double answer;
     private Random random = new Random();
 
@@ -31,12 +36,12 @@ public class PlayFragment extends Fragment {
     private TextView guessLabel, answerLabel, hintsLabel, countdownLabel;
     private Button btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnDel, btnHash, btnMinus;
 
-    public static boolean HINTS = false;
-
     private int wrongCount;
     private int time = 0;
 
     private CountDownTimer countDown;
+    private int questionCount = 0;
+
 
     @Nullable
     @Override
@@ -176,6 +181,7 @@ public class PlayFragment extends Fragment {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     resetGame();
+                                    calculateScore();
                                 }
                             })
                     .show();
@@ -213,15 +219,35 @@ public class PlayFragment extends Fragment {
         }
     }
 
+    /**
+     * This method calculate score for each question.
+     */
+    private void calculateScore() {
+        SCORE += 100 / (10 - this.time);
+    }
+
+    /**
+     * Reset game
+     */
     private void resetGame() {
         wrongCount = 0;
         guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = "));
         answerLabel.setText("?");
         hintsLabel.setText("");
+        questionCount++;
+
+        if (questionCount >= 10) {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            getActivity().startActivity(intent);
+        }
+
         countDown();
     }
 
 
+    /**
+     * Timer count down for each questions
+     */
     public void countDown() {
 
         time = 0;

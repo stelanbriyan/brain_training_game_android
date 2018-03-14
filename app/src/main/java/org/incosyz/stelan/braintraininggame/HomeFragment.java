@@ -20,6 +20,19 @@ public class HomeFragment extends Fragment {
                 container, false);
         View aboutButton = rootView.findViewById(R.id.about_button);
 
+        if (PlayFragment.SCORE != 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Your Score : " + (int) PlayFragment.SCORE)
+                    .setPositiveButton(R.string.ok_label,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    PlayFragment.SCORE = 0;
+                                }
+                            })
+                    .show();
+        }
+
         aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

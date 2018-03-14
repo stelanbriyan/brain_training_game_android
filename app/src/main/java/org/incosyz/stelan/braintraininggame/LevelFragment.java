@@ -51,6 +51,9 @@ public class LevelFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * Start game and choose game level and set it to level fragment.
+     */
     public void startGame() {
         String difficulty = spinner.getSelectedItem().toString();
         if ("Novice".equals(difficulty)) {
