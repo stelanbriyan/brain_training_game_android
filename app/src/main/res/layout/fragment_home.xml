@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/menu_space"
+            android:layout_marginBottom="@dimen/menu_space1"
             android:text="@string/long_app_name"
             android:textAlignment="center"
             android:textAppearance="?android:textAppearanceLarge"

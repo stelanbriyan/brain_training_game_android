@@ -10,4 +10,5 @@
     <color name="white">#fff</color>
     <color name="field_color">#A6F8F8F6</color>
     <color name="field_color_opacity">#80F8F8F6</color>
+    <color name="colorRed">#FF0000</color>
 </resources>

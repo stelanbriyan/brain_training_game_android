@@ -47,9 +47,10 @@ public class PlayFragment extends Fragment {
         this.guessLabel = rootView.findViewById(R.id.guess_label);
         this.hintsLabel = rootView.findViewById(R.id.hints_label);
         this.countdownLabel = rootView.findViewById(R.id.countdown_label);
-        this.guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
+        this.guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = "));
 
         this.answerLabel = rootView.findViewById(R.id.answerLabel);
+        this.answerLabel.setText("?");
         this.btn0 = rootView.findViewById(R.id.btn0);
         this.btn1 = rootView.findViewById(R.id.btn1);
         this.btn2 = rootView.findViewById(R.id.btn2);
@@ -140,10 +141,15 @@ public class PlayFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String text = answerLabel.getText().toString();
+
                 if (text.contains("-")) {
-                    answerLabel.setText(text.replace("-", ""));
+                    text = text.replace("-", "");
+                    if ("".equals(text)) {
+                        text = "?";
+                    }
+                    answerLabel.setText(text);
                 } else {
-                    answerLabel.setText("-".concat(text));
+                    answerLabel.setText("-".concat(text).replace("?", ""));
                 }
             }
         });
@@ -153,6 +159,10 @@ public class PlayFragment extends Fragment {
     }
 
     public void checkAnswer() {
+        if ("?".equals(this.answerLabel.getText()) || "-".equals(this.answerLabel.getText())) {
+            return;
+        }
+
         final int userAnswer = Integer.parseInt(this.answerLabel.getText().toString());
         int correctAnswer = (int) answer;
 
@@ -205,8 +215,8 @@ public class PlayFragment extends Fragment {
 
     private void resetGame() {
         wrongCount = 0;
-        guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = ?"));
-        answerLabel.setText("0");
+        guessLabel.setText("Guess : ".concat(generateGuessLabel()).concat(" = "));
+        answerLabel.setText("?");
         hintsLabel.setText("");
         countDown();
     }
@@ -239,13 +249,13 @@ public class PlayFragment extends Fragment {
         if (text.length() > 1) {
             this.answerLabel.setText(text.substring(0, text.length() - 1));
         } else {
-            this.answerLabel.setText("0");
+            this.answerLabel.setText("?");
         }
     }
 
     public void setAnswerText(View view) {
         Button button = (Button) view;
-        if ("0".equals(this.answerLabel.getText())) {
+        if ("?".equals(this.answerLabel.getText())) {
             this.answerLabel.setText("");
         }
         this.answerLabel.setText(this.answerLabel.getText() + button.getText().toString());

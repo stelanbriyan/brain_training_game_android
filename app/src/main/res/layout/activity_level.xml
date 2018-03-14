@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/menu_background_level"
     tools:context="org.incosyz.stelan.braintraininggame.LevelActivity">
 
-    <!--android:background="@drawable/menu_background"-->
+
     <fragment
         android:id="@+id/level_fragment"
         class="org.incosyz.stelan.braintraininggame.LevelFragment"

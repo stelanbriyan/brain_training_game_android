@@ -13,6 +13,12 @@
         <item name="colorButtonNormal">@color/blackLight</item>
         <item name="android:textColor">@color/white</item>
     </style>
+    <style name="NumberPadButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/shadow</item>
+        <item name="colorButtonNormal">@color/blackLight</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20dp</item>
+    </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

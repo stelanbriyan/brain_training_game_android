@@ -18,9 +18,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/menu_space"
-            android:text="Guess : 99 + 65 ?"
+            android:text="Guess : 99 + 65"
             android:textAppearance="?android:textAppearanceLarge"
-            android:textSize="@dimen/sub_menu_text_size" />
+            android:textSize="@dimen/menu_text_size" />
 
         <TextView
             android:id="@+id/answerLabel"
@@ -42,7 +42,9 @@
         <TextView
             android:id="@+id/hints_label"
             android:layout_width="match_parent"
+            android:textColor="@color/colorRed"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:layout_marginBottom="@dimen/menu_space"
             android:textAppearance="?android:textAppearanceLarge"
             android:textSize="@dimen/menu_text_size" />
