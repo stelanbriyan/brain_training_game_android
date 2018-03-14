@@ -14,7 +14,9 @@
     <string name="start_label">Start</string>
 
     <string name="about_title">About</string>
-    <string name="about_text">The resources that you save in the subdirectories defined in table 1 are your "default" resources. That is, these resources define the default design and content for your app. However, different types of Android-powered devices might call for different types of resources.</string>
+    <string name="about_text">The user is presented with four levels of game difficulty, Novice, Easy, Medium, Guru.
+Clicking on each one of them sets the maximum number of terms involved in the arithmetic
+expression that the user needs to calculate</string>
     <string name="ok_label">OK</string>
     <string name="yes_label">YES</string>
     <string name="no_label">NO</string>

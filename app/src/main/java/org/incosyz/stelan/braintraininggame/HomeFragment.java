@@ -86,6 +86,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        View continueButton = rootView.findViewById(R.id.continue_button);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),
+                        LevelActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
         return rootView;
     }
 }
